@@ -8,16 +8,22 @@ import EdgingPageContent from './EdgingPageContent';
 import FurnituraPageContent from './FurnituraPageContent';
 import DoorsPageContent from './DoorsPageContent';
 import DeliveryPageContent from './DeliveryPageContent';
+import ZamerPageContent from './ZamerPageContent';
+import MontazhPageContent from './MontazhPageContent';
+import OurWorksPageContent from './OurWorksPageContent';
 
 const EDGING_SLUG = 'myagkie-okna-s-okantovkoy';
 const FURNITURA_SLUG = 'furnitura-dlya-myagkikh-okon';
 const DOORS_SLUG = 'myagkie-okna-dver';
 const DELIVERY_SLUG = 'dostavka-myagkih-okon';
+const ZAMER_SLUG = 'zamer-myagkih-okon';
+const MONTAZH_SLUG = 'montazh-myagkih-okon';
+const OUR_WORKS_SLUG = 'our_works';
 
 export async function generateStaticParams() {
   const pages = data.getPages();
   const slugs = pages.map((p) => ({ slug: p.slug }));
-  [EDGING_SLUG, FURNITURA_SLUG, DOORS_SLUG, DELIVERY_SLUG].forEach((slug) => {
+  [EDGING_SLUG, FURNITURA_SLUG, DOORS_SLUG, DELIVERY_SLUG, ZAMER_SLUG, MONTAZH_SLUG, OUR_WORKS_SLUG].forEach((slug) => {
     if (!slugs.some((s) => s.slug === slug)) slugs.push({ slug });
   });
   return slugs;
@@ -48,6 +54,24 @@ export async function generateMetadata({ params }) {
       description: 'Доставка мягких окон. Прочные, гибкие материалы, быстрая установка и долговечность. Быстрая доставка до двери. Мягкие окна «Стиль» уже более 7 лет занимаются производством',
     };
   }
+  if (params.slug === ZAMER_SLUG) {
+    return {
+      title: 'Замер мягких окон | Мягкие окна Стиль',
+      description: 'Замер мягких окон . Прочные, гибкие материалы, быстрая установка и долговечность. Как правильно выбрать и установить фурнитуру, чтобы обеспечить надежность мягких окон. Мягкие окна «Стиль»',
+    };
+  }
+  if (params.slug === MONTAZH_SLUG) {
+    return {
+      title: 'Монтаж мягких окон | Мягкие окна Стиль',
+      description: 'Монтаж мягких окон. Прочные, гибкие материалы, быстрая установка и долговечность. Как правильно выбрать и установить фурнитуру, чтобы обеспечить надежность мягких окон. Мягкие окна «Стиль»',
+    };
+  }
+  if (params.slug === OUR_WORKS_SLUG) {
+    return {
+      title: 'Наши работы — Мягкие окна Стиль',
+      description: '',
+    };
+  }
   const page = data.getPageBySlug(params.slug);
   if (!page) return { title: 'Страница не найдена' };
   return { title: `${page.title} — Мягкие окна Стиль`, description: page.excerpt || '' };
@@ -65,6 +89,15 @@ export default function PageBySlug({ params }) {
   }
   if (params.slug === DELIVERY_SLUG) {
     return <DeliveryPageContent />;
+  }
+  if (params.slug === ZAMER_SLUG) {
+    return <ZamerPageContent />;
+  }
+  if (params.slug === MONTAZH_SLUG) {
+    return <MontazhPageContent />;
+  }
+  if (params.slug === OUR_WORKS_SLUG) {
+    return <OurWorksPageContent />;
   }
   const page = data.getPageBySlug(params.slug);
   if (!page) notFound();

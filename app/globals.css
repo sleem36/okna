@@ -55,6 +55,23 @@ html {
   box-sizing: border-box;
 }
 
+/* Страница «Наши работы»: активная вкладка в потоке, чтобы отображались все карточки (44) */
+#our_works .our_works__content {
+  min-height: 1px;
+}
+#our_works .our_works__content-slider.active {
+  position: relative;
+  z-index: 10;
+}
+#our_works .our_works__content-slider:not(.active) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Видеослайдер — как в docs/main/video.html, docs/reviews.html */
 .vslider-wrap {
   max-width: 900px;

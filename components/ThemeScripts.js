@@ -124,7 +124,10 @@ export default function ThemeScripts() {
     }
     initReviewSwiper();
 
-    // Блок «Наши работы»: переключение вкладок и инициализация слайдеров
+    // Страница «Наши работы» (/our_works): вкладки и фильтр управляются React (OurWorksPageContent),
+    // здесь ничего не делаем, чтобы не снимать .active с единственного блока контента.
+
+    // Блок «Наши работы»: переключение вкладок и инициализация слайдеров (на других страницах)
     const worksTitles = document.querySelectorAll('#works .works__content-title');
     const worksSwipe = document.querySelector('#works .works-swipe');
     if (worksTitles.length && worksSwipe) {

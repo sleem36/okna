@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "parse": "node scripts/parse-wp-xml.js"
+    "parse": "node scripts/parse-wp-xml.js",
+    "parse-our-works": "node scripts/parse-our-works-md.js"
   },
   "dependencies": {
     "next": "14.2.18",
