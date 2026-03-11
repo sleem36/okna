@@ -198,22 +198,26 @@ export default function ThemeScripts() {
     }
     initVideoSwiper();
 
-    // SEO-блок «Мягкие окна Стиль» — кнопка «Читать далее» скрывает/открывает блок .seo_block-subtitle-expandable (делегирование)
+    // SEO-блок: кнопка «Читать далее» раскрывает/сворачивает текст (главная — .seo_block-subtitle-expandable, страницы Окантовка/Фурнитура — .seo_block-subtitle)
     function handleSeoBtnClick(e) {
       const seoBtn = e.target.closest('.js-seo-btn');
       if (!seoBtn) return;
       const wrapper = seoBtn.closest('.seo_block__wrapper');
-      const expandable = wrapper ? wrapper.querySelector('.seo_block-subtitle-expandable') : null;
-      if (!expandable) return;
+      if (!wrapper) return;
+      let block = wrapper.querySelector('.seo_block-subtitle-expandable');
+      if (!block) block = wrapper.querySelector('.seo_block-subtitle');
+      if (!block) return;
       e.preventDefault();
-      const elemHeight = expandable.scrollHeight;
-      const isClosed = !expandable.style.maxHeight || expandable.style.maxHeight === '' || expandable.style.maxHeight === '0px';
+      const fullHeight = block.scrollHeight;
+      const currentMax = block.style.maxHeight || '';
+      const isExpandable = block.classList.contains('seo_block-subtitle-expandable');
+      const isClosed = !currentMax || currentMax === '0px' || currentMax === '13em' || (isExpandable && currentMax === '0');
       if (isClosed) {
-        expandable.style.maxHeight = elemHeight + 'px';
+        block.style.maxHeight = fullHeight + 'px';
         seoBtn.classList.add('disable');
         seoBtn.textContent = 'свернуть';
       } else {
-        expandable.style.maxHeight = '0';
+        block.style.maxHeight = isExpandable ? '0' : '13em';
         seoBtn.classList.remove('disable');
         seoBtn.textContent = 'читать далее';
       }
