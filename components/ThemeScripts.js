@@ -198,15 +198,27 @@ export default function ThemeScripts() {
     }
     initVideoSwiper();
 
-    // SEO-блок «Мягкие окна Стиль» — кнопка «Читать далее» раскрывает текст
-    const seoBtn = document.querySelector('.js-seo-btn');
-    const seoSubtitle = document.querySelector('.seo_block-subtitle');
-    if (seoBtn && seoSubtitle) {
-      seoBtn.addEventListener('click', () => {
-        const expanded = seoSubtitle.classList.toggle('expanded');
-        seoBtn.textContent = expanded ? 'Свернуть' : 'Читать далее';
-      });
+    // SEO-блок «Мягкие окна Стиль» — кнопка «Читать далее» скрывает/открывает блок .seo_block-subtitle-expandable (делегирование)
+    function handleSeoBtnClick(e) {
+      const seoBtn = e.target.closest('.js-seo-btn');
+      if (!seoBtn) return;
+      const wrapper = seoBtn.closest('.seo_block__wrapper');
+      const expandable = wrapper ? wrapper.querySelector('.seo_block-subtitle-expandable') : null;
+      if (!expandable) return;
+      e.preventDefault();
+      const elemHeight = expandable.scrollHeight;
+      const isClosed = !expandable.style.maxHeight || expandable.style.maxHeight === '' || expandable.style.maxHeight === '0px';
+      if (isClosed) {
+        expandable.style.maxHeight = elemHeight + 'px';
+        seoBtn.classList.add('disable');
+        seoBtn.textContent = 'свернуть';
+      } else {
+        expandable.style.maxHeight = '0';
+        seoBtn.classList.remove('disable');
+        seoBtn.textContent = 'читать далее';
+      }
     }
+    document.body.addEventListener('click', handleSeoBtnClick);
 
     // Калькулятор #calc1 — ползунки, тип крепежа, расчёт стоимости
     const calcForm = document.getElementById('calc1');
@@ -306,6 +318,10 @@ export default function ThemeScripts() {
         }
       });
     });
+
+    return () => {
+      document.body.removeEventListener('click', handleSeoBtnClick);
+    };
   }, []);
 
   return null;

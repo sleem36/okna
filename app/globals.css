@@ -36,9 +36,23 @@ html {
   scroll-margin-top: 120px;
 }
 
-/* SEO-блок «Мягкие окна Стиль» — раскрытие по кнопке «Читать далее» */
+/* SEO-блок «Мягкие окна Стиль» — блок под кнопкой изначально свёрнут, раскрывается по клику */
+.seo_block-subtitle-expandable {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease;
+}
 .seo_block-subtitle.expanded {
   max-height: none;
+}
+/* Кнопка «Читать далее» — сохраняем высоту как у .btn в теме (padding 28px) */
+.seo_block__wrapper .js-seo-btn.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  min-height: 76px;
+  box-sizing: border-box;
 }
 
 /* Видеослайдер — как в docs/main/video.html, docs/reviews.html */

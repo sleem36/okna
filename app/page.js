@@ -188,8 +188,8 @@ const FURNITURE_ITEMS = [
   },
 ];
 
-// Блок «Мягкие окна Стиль» (SEO-текст) — как в docs/main/style.html
-const SEO_STYLE_HTML = `<p>&nbsp;</p>
+// Блок «Мягкие окна Стиль» (SEO-текст) — превью над кнопкой, остальное раскрывается по клику (как на макете)
+const SEO_STYLE_HTML_PREVIEW = `<p>&nbsp;</p>
 <p>Современные мягкие окна – это инновационное решение, сочетающее в себе стиль и практичность. Они идеально подходят для различных типов помещений, будь то веранда, беседка или терраса. Мягкие окна предоставляют ряд преимуществ, которые делают их незаменимыми в современном дизайне интерьера и экстерьера.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -198,8 +198,8 @@ const SEO_STYLE_HTML = `<p>&nbsp;</p>
 <p><strong>Эстетический вид:</strong> Мягкие окна придают вашему дому современный и стильный вид. Они легко вписываются в любой интерьер, создавая уют и комфорт.</p>
 <p>&nbsp;</p>
 <p><strong>Защита от погодных условий:</strong> Такие окна обеспечивают отличную защиту от ветра, дождя и снега, сохраняя тепло и уют внутри помещения. Вы сможете наслаждаться прекрасным видом на природу в любое время года.</p>
-<p>&nbsp;</p>
-<p><strong>Простота установки и использования:</strong> Мягкие окна легко устанавливаются и демонтируются, что позволяет быстро адаптировать ваше помещение к изменяющимся условиям.</p>
+<p>&nbsp;</p>`;
+const SEO_STYLE_HTML_EXPANDABLE = `<p><strong>Простота установки и использования:</strong> Мягкие окна легко устанавливаются и демонтируются, что позволяет быстро адаптировать ваше помещение к изменяющимся условиям.</p>
 <p>&nbsp;</p>
 <p><strong>Прочность и долговечность:</strong> Используемые материалы обладают высокой прочностью и устойчивостью к воздействию ультрафиолетовых лучей, что гарантирует долгий срок службы мягких окон.</p>
 <p>&nbsp;</p>
@@ -580,6 +580,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Блок «Оставить заявку на консультацию» — разметка как в docs/main/contacts.html */}
+      <section id="contacts_order">
+        <div className="container">
+          <div className="price_window_order contacts_order">
+            <div className="price_window_order-title">
+              <h3>Оставить заявку на консультацию</h3>
+              <p>Оставьте заявку и получите ремешки для мягких окон в подарок</p>
+            </div>
+            <form className="price_window_form main_form contacts_form" id="main2" action="#">
+              <div className="price_window_form-inp contacts_form-inp">
+                <input type="text" name="name" required maxLength={35} />
+                <span className="floating-label floating-label-name">Имя</span>
+              </div>
+              <div className="price_window_form-inp contacts_form-inp">
+                <input type="tel" name="phone" required />
+                <span className="floating-label floating-label-name">Номер телефона</span>
+              </div>
+              <button type="submit" className="btn price_window_form-btn contacts_form-btn">
+                Оставить заявку
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       {/* Блок калькулятора — разметка как в docs/main/calculate.html */}
       <section id="calculate">
         <div className="container">
@@ -654,51 +679,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Блок «Мягкие окна Стиль» (SEO) — разметка как в docs/main/style.html */}
+      {/* Блок «Мягкие окна Стиль» (SEO) — превью текста, кнопка по центру контента, остальное раскрывается */}
       <section>
         <div className="container">
           <div className="seo_block__wrapper">
             <div className="seo_block-title">
               <h2>Мягкие окна Стиль: Практичность для Вашей дачи</h2>
             </div>
+            <div className="seo_block-subtitle" dangerouslySetInnerHTML={{ __html: SEO_STYLE_HTML_PREVIEW }} />
+            <div className="seo_block-subtitle-expandable" dangerouslySetInnerHTML={{ __html: SEO_STYLE_HTML_EXPANDABLE }} />
             <div className="btn js-seo-btn">Читать далее</div>
-            <div className="seo_block-subtitle" dangerouslySetInnerHTML={{ __html: SEO_STYLE_HTML }} />
           </div>
-        </div>
-      </section>
-
-      {/* Блок «Оставить заявку на консультацию» — разметка как в docs/main/contacts.html */}
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p>Оставьте заявку и получите ремешки для мягких окон в подарок</p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">
-                Оставить заявку
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section style={{ padding: '60px 0' }}>
-        <div className="container">
-          <p style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <Link href="/blog" style={{ color: '#4B0082', fontWeight: 600 }}>
-              Статьи и блог →
-            </Link>
-          </p>
         </div>
       </section>
     </>
