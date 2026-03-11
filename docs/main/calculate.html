@@ -1,0 +1,81 @@
+<section id="calculate">
+    <div class="container">
+        <div class="calculate__wrapper">
+            <div class="calculate__title">
+                <h2><span>Рассчитайте стоимость</span> ваших мягких окон</h2>
+                <p>И оставьте заявку</p>
+            </div>
+            <form class="calculate__form" id="calc1">
+                <div class="calculate__form-calculator">
+                    <div class="calculate__form-title">Калькулятор стоимости</div>
+                    <div class="calculate__form-block range__slider" data-min="0" data-max="100">
+                        <input type="range" class="calculate__form-inp range" value="1" max="100" min="0">
+                        <output class="bubble" style="left: calc(1% + 7.85px);">1 м²</output>
+                        <input type="text" name="meters" class="calculate__form-inp squares" placeholder="1 м²">
+                    </div>
+
+                    <div class="form-block-title">Доставка</div>
+                    <div class="calculate__form-block range__slider" data-min="0" data-max="100">
+                        <input type="range" class="calculate__form-inp range range_delivery" value="0" max="100" min="0">
+                        <output class="bubble bubble_delivery" style="left: calc(0% + 8px);">0 км²</output>
+                        <input type="text" name="delivery" class="calculate__form-inp delivery" placeholder="0 км">
+                    </div>
+
+                    <div class="calculate__form-block check">
+                        <div class="form-block-check">
+                            <label class="control control-checkbox">
+                                Монтаж с доставкой <img src="https://okna-myagkie.ru/wp-content/themes/soft-windows/assets/img/Truck.svg" alt="">
+                                <input type="checkbox" name="montage" checked="checked">
+                                <div class="control_indicator"></div>
+                            </label>
+                        </div>
+                        <p class="calculate__form-description">* Минимальная стоимость монтажа -7000 руб.
+                            Доставка в пределах МКАД+30км - 1000 руб.</p>
+                    </div>
+                    <div class="calculate__form-block">
+                        <div class="form-block-title">Тип крепежа:</div>
+                        <div class="form-block-type fasteners">
+                                                                                                <div data-value="1300" data-index="0" class="block-type active"><img src="https://okna-myagkie.ru/wp-content/uploads/2024/08/крепления-1479.jpg" alt="">Скоба -ремень</div>
+                                                                    <input type="hidden" name="krepezh_name" value="Скоба -ремень">
+                                    <input type="hidden" name="krepezh_price" value="1300">
+                                                                                                <div data-value="1400" data-index="1" class="block-type"><img src="https://okna-myagkie.ru/wp-content/uploads/2024/08/крепления-1401.jpg" alt="">Поворотная скоба</div>
+                                                                    <input type="hidden" name="krepezh_name" value="Поворотная скоба">
+                                    <input type="hidden" name="krepezh_price" value="1400">
+                                                                                                <div data-value="1900" data-index="2" class="block-type"><img src="https://okna-myagkie.ru/wp-content/uploads/2024/08/крепления-1413-1.jpg" alt="">Французкий замок</div>
+                                                                    <input type="hidden" name="krepezh_name" value="Французкий замок">
+                                    <input type="hidden" name="krepezh_price" value="1900">
+                                                                                                <div data-value="1200" data-index="3" class="block-type"><img src="https://okna-myagkie.ru/wp-content/uploads/2024/08/крепления-1485-1.jpg" alt="">Люверс для жесткого крепления</div>
+                                                                    <input type="hidden" name="krepezh_name" value="Люверс для жесткого крепления">
+                                    <input type="hidden" name="krepezh_price" value="1200">
+                                                    </div>
+                    </div>
+                    
+                </div>
+                <div class="calculate__form-order">
+                    <div class="calculate__form-block">
+                        <div class="form-block-title">Молния (пг/м)</div>
+                        <input type="number" name="molnia" class="calculate__form-inp lightning" placeholder="0">
+                    </div>
+
+                    <div class="calculate__form-block">
+                        <div class="form-block-title">Ремни для подвеса</div>
+                        <input type="number" name="remni" class="calculate__form-inp belt" placeholder="0">
+                    </div>
+                    <div class="calculate__form-block">
+                        <div class="form-block-title price">Стоимость: <span>8 300 руб.</span>
+                            <input type="hidden" class="calc_price" name="calc_price" value="8300">
+                        </div>
+                    </div>
+                    <div class="calculate__form-title">Оставьте заявку на точный
+                        рассчет стоимости мягких окон</div>
+                    <div class="calculate__form-block">
+                        <div class="form-block-title">Ваш номер телефона</div>
+                        <div class="calc_error">Введите телефон полностью</div>
+                        <input type="tel" name="phone" required="" class="calculate__form-inp tel" placeholder="+7 (925) 000-99-77">
+                    </div>
+                    <button class="btn calc-btn">Оставить заявку</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
