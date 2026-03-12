@@ -8,16 +8,16 @@ export default function OrderFormBlock({ title = 'Не смогли опреде
           <div className="price_window_order-title">
             <h3>{title}</h3>
           </div>
-          <form className="price_window_form" id="main1">
-            <div className="price_window_form-inp">
+          <form className="price_window_form main_form contacts_form" id="main1" action="#">
+            <div className="price_window_form-inp contacts_form-inp">
               <input type="text" name="name" required maxLength={35} />
               <span className="floating-label floating-label-name">Имя</span>
             </div>
-            <div className="price_window_form-inp">
+            <div className="price_window_form-inp contacts_form-inp">
               <input type="tel" name="phone" required />
               <span className="floating-label floating-label-name">Номер телефона</span>
             </div>
-            <button type="submit" className="btn price_window_form-btn">
+            <button type="submit" className="btn price_window_form-btn contacts_form-btn">
               Оставить заявку
             </button>
           </form>

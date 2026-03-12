@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Breadcrumbs({ items = [] }) {
   if (!items.length) return null;
   return (
     <div className="container">
-      <div style={{ paddingTop: '100px' }} />
+      <div style={{ paddingTop: "100px" }} />
       <nav className="breadcrumbs" aria-label="Breadcrumbs">
         <Link href="/">Мягкие окна</Link>
         {items.map((item, i) => (
