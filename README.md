@@ -61,7 +61,8 @@ npm start
 ## Структура проекта
 
 - `data/` — JSON с постами, страницами, рубриками, метками, меню (результат парсинга); `site.json` — контакты и настройки (логотип, телефон, соцсети)
-- `public/theme/` — ресурсы темы WordPress (soft-windows): `css/`, `img/`, `fonts/`, `libs/` (скопированы из `C:\ospanel\domains\poli.local\wp-content\themes\soft-windows\assets\`)
+- `public/theme/` — ресурсы темы WordPress (soft-windows): `css/`, `img/`, `fonts/`, `libs/` (подключены в приложении как `/theme/...`)
+- `public/assets/` — копия папки темы из локального WordPress (`wp-content/themes/soft-windows/assets/`): `js/main.js` (оригинальный скрипт слайдеров, калькулятора, меню), `css/style.css`, `libs/swiper/`, `img/`, `fonts/`, `html/`. Используется как эталон для сверки логики; приложение по умолчанию берёт стили и Swiper из `public/theme/`
 - `scripts/parse-wp-xml.js` — скрипт парсинга WXR
 - `lib/data.js` — чтение данных из JSON; `lib/site.js` — конфиг сайта
 - `app/` — маршруты Next.js (App Router): главная (секции как в tpl_main-page), страницы `/[slug]`, записи `/post/[slug]`, рубрики `/category/[slug]`, `/blog`

@@ -11,6 +11,11 @@ import DeliveryPageContent from './DeliveryPageContent';
 import ZamerPageContent from './ZamerPageContent';
 import MontazhPageContent from './MontazhPageContent';
 import OurWorksPageContent from './OurWorksPageContent';
+import CenaPageContent from './CenaPageContent';
+import StocksPageContent from './StocksPageContent';
+import HowOrderPageContent from './HowOrderPageContent';
+import ReviewsPageContent from './ReviewsPageContent';
+import GalleryPageContent from './GalleryPageContent';
 
 const EDGING_SLUG = 'myagkie-okna-s-okantovkoy';
 const FURNITURA_SLUG = 'furnitura-dlya-myagkikh-okon';
@@ -19,11 +24,16 @@ const DELIVERY_SLUG = 'dostavka-myagkih-okon';
 const ZAMER_SLUG = 'zamer-myagkih-okon';
 const MONTAZH_SLUG = 'montazh-myagkih-okon';
 const OUR_WORKS_SLUG = 'our_works';
+const CENA_SLUG = 'myagkie-okna-czena';
+const STOCKS_SLUG = 'stocks';
+const HOW_ORDER_SLUG = 'how_order';
+const REVIEWS_SLUG = 'reviews';
+const GALLERY_SLUG = 'gallery';
 
 export async function generateStaticParams() {
   const pages = data.getPages();
   const slugs = pages.map((p) => ({ slug: p.slug }));
-  [EDGING_SLUG, FURNITURA_SLUG, DOORS_SLUG, DELIVERY_SLUG, ZAMER_SLUG, MONTAZH_SLUG, OUR_WORKS_SLUG].forEach((slug) => {
+  [EDGING_SLUG, FURNITURA_SLUG, DOORS_SLUG, DELIVERY_SLUG, ZAMER_SLUG, MONTAZH_SLUG, OUR_WORKS_SLUG, CENA_SLUG, STOCKS_SLUG, HOW_ORDER_SLUG, REVIEWS_SLUG, GALLERY_SLUG].forEach((slug) => {
     if (!slugs.some((s) => s.slug === slug)) slugs.push({ slug });
   });
   return slugs;
@@ -72,6 +82,36 @@ export async function generateMetadata({ params }) {
       description: '',
     };
   }
+  if (params.slug === CENA_SLUG) {
+    return {
+      title: 'Цены на мягкие окна от 1200 рублей м² без монтажа | Мягкие окна Стиль',
+      description: 'Цены. Прочные, гибкие материалы, быстрая установка и долговечность. Быстрая доставка до двери. Мягкие окна «Стиль» уже более 7 лет занимаются производством',
+    };
+  }
+  if (params.slug === STOCKS_SLUG) {
+    return {
+      title: 'Акции — Мягкие окна Стиль',
+      description: '',
+    };
+  }
+  if (params.slug === HOW_ORDER_SLUG) {
+    return {
+      title: 'Как заказать — Мягкие окна Стиль',
+      description: '',
+    };
+  }
+  if (params.slug === REVIEWS_SLUG) {
+    return {
+      title: 'Отзывы — Мягкие окна Стиль',
+      description: '',
+    };
+  }
+  if (params.slug === GALLERY_SLUG) {
+    return {
+      title: 'Галерея — Мягкие окна Стиль',
+      description: '',
+    };
+  }
   const page = data.getPageBySlug(params.slug);
   if (!page) return { title: 'Страница не найдена' };
   return { title: `${page.title} — Мягкие окна Стиль`, description: page.excerpt || '' };
@@ -98,6 +138,21 @@ export default function PageBySlug({ params }) {
   }
   if (params.slug === OUR_WORKS_SLUG) {
     return <OurWorksPageContent />;
+  }
+  if (params.slug === CENA_SLUG) {
+    return <CenaPageContent />;
+  }
+  if (params.slug === STOCKS_SLUG) {
+    return <StocksPageContent />;
+  }
+  if (params.slug === HOW_ORDER_SLUG) {
+    return <HowOrderPageContent />;
+  }
+  if (params.slug === REVIEWS_SLUG) {
+    return <ReviewsPageContent />;
+  }
+  if (params.slug === GALLERY_SLUG) {
+    return <GalleryPageContent />;
   }
   const page = data.getPageBySlug(params.slug);
   if (!page) notFound();

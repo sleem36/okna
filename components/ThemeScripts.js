@@ -92,11 +92,11 @@ export default function ThemeScripts() {
     }
     initReasonSwiper();
 
-    // Слайдер «Отзывы» — как в теме soft-windows assets/js/main.js: на десктопе 3 слайда (два по бокам меньше), overlap, centered
+    // Слайдер «Отзывы» — как в теме soft-windows assets/js/main.js: на десктопе 2 слайда, overlap, centered (главная и /reviews)
     let reviewTries = 0;
     function initReviewSwiper() {
       const reviewEl = document.querySelector('.swiper.review');
-      if (!reviewEl || reviewEl.swiper || reviewTries > 40) return;
+      if (!reviewEl || reviewEl.swiper || reviewTries > 60) return;
       if (typeof window !== 'undefined' && window.Swiper) {
         new window.Swiper('.swiper.review', {
           loop: true,
@@ -123,9 +123,58 @@ export default function ThemeScripts() {
       }
     }
     initReviewSwiper();
+    const reviewInterval = setInterval(() => {
+      reviewTries += 1;
+      initReviewSwiper();
+      const el = document.querySelector('.swiper.review');
+      if (el?.swiper || reviewTries > 60) clearInterval(reviewInterval);
+    }, 100);
 
     // Страница «Наши работы» (/our_works): вкладки и фильтр управляются React (OurWorksPageContent),
     // здесь ничего не делаем, чтобы не снимать .active с единственного блока контента.
+
+    // Страница «Цены»: вкладки «Стоимость мягких окон» (как в оригинале — ширина в px, сдвиг translateX в px)
+    const costFurnitureSection = document.querySelector('#cost_furniture');
+    if (costFurnitureSection) {
+      const costTitlesOdin = costFurnitureSection.querySelectorAll('.cost-title.odin');
+      const cosrSlider = costFurnitureSection.querySelector('.cosr_slider');
+      const costWrapper = costFurnitureSection.querySelector('.cost_wrapper');
+      const costContents = costWrapper ? costWrapper.querySelectorAll('.cost__content') : [];
+      const numSlides = costContents.length;
+
+      function applyCostSliderWidth() {
+        if (!cosrSlider || !costWrapper || !numSlides) return;
+        const sliderWidth = cosrSlider.offsetWidth;
+        costWrapper.style.width = `${sliderWidth * numSlides}px`;
+        costWrapper.style.transition = 'transform 0.8s';
+        costContents.forEach((el) => {
+          el.style.flex = '0 0 auto';
+          el.style.width = `${sliderWidth}px`;
+          el.style.maxWidth = `${sliderWidth}px`;
+          el.style.minWidth = `${sliderWidth}px`;
+          el.style.boxSizing = 'border-box';
+        });
+        const activeTitle = costFurnitureSection.querySelector('.cost-title.odin.active');
+        const idx = activeTitle ? Number(activeTitle.getAttribute('data-index')) : 0;
+        costWrapper.style.transform = `translateX(-${idx * sliderWidth}px)`;
+      }
+
+      if (costTitlesOdin.length && costWrapper && numSlides) {
+        applyCostSliderWidth();
+        if (typeof window !== 'undefined') {
+          window.addEventListener('resize', applyCostSliderWidth);
+        }
+        costTitlesOdin.forEach((titleEl) => {
+          titleEl.addEventListener('click', () => {
+            const index = Number(titleEl.getAttribute('data-index'));
+            costTitlesOdin.forEach((t) => t.classList.remove('active'));
+            titleEl.classList.add('active');
+            const sliderWidth = cosrSlider.offsetWidth;
+            costWrapper.style.transform = `translateX(-${index * sliderWidth}px)`;
+          });
+        });
+      }
+    }
 
     // Блок «Наши работы»: переключение вкладок и инициализация слайдеров (на других страницах)
     const worksTitles = document.querySelectorAll('#works .works__content-title');
@@ -168,6 +217,41 @@ export default function ThemeScripts() {
       }, 50);
     }
 
+    // Слайдер акций на странице /stocks (#stocks .swiper.works) — как в оригинале: один swiper.works с навигацией
+    // Опрос DOM, чтобы сработало и при прямой загрузке /stocks, и при клиентской навигации
+    let stocksTries = 0;
+    const STOCKS_POLL_MAX = 60; // ~3 сек при интервале 50ms
+    function initStocksSwiper() {
+      if (typeof window === 'undefined' || !window.Swiper || stocksTries > STOCKS_POLL_MAX) return;
+      const el = document.querySelector('#stocks .swiper.works');
+      if (!el || el.swiper) return;
+      // Как в теме soft-windows assets/js/main.js — workSwiperInit(): только .works.active, без loop
+      new window.Swiper(el, {
+        slidesPerView: 1,
+        spaceBetween: 40,
+        pagination: {
+          el: '#stocks .works-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '#stocks .works-next',
+          prevEl: '#stocks .works-prev',
+        },
+        breakpoints: {
+          1300: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+          },
+        },
+      });
+    }
+    const stocksInterval = setInterval(() => {
+      stocksTries += 1;
+      initStocksSwiper();
+      const el = document.querySelector('#stocks .swiper.works');
+      if (el?.swiper || stocksTries > STOCKS_POLL_MAX) clearInterval(stocksInterval);
+    }, 50);
+
     // Видеослайдер .vslider-swiper (docs/main/video.html)
     let videoTries = 0;
     function initVideoSwiper() {
@@ -200,6 +284,128 @@ export default function ThemeScripts() {
       }
     }
     initVideoSwiper();
+
+    // Страница «Галерея» (/gallery): вкладки Фотоотчеты/Видеоотчеты и слайдеры .photo, .video-swiper (как в main.js)
+    let galleryTries = 0;
+    const GALLERY_POLL_MAX = 50;
+    function initGalleryPage() {
+      const gallerySection = document.querySelector('#gallery');
+      if (!gallerySection || galleryTries > GALLERY_POLL_MAX) return;
+      const photoOtch = gallerySection.querySelector('.photo_otch');
+      const videoOtch = gallerySection.querySelector('.video_otch');
+      if (photoOtch && !photoOtch.dataset.galleryBound) {
+        photoOtch.dataset.galleryBound = '1';
+        photoOtch.addEventListener('click', () => {
+          gallerySection.querySelectorAll('.gallery-nav-item').forEach((el) => el.classList.remove('active'));
+          gallerySection.querySelectorAll('.gallery_swiper').forEach((el) => el.classList.remove('active'));
+          photoOtch.classList.add('active');
+          gallerySection.querySelector('.gallery-photo').classList.add('active');
+        });
+      }
+      if (videoOtch && !videoOtch.dataset.galleryBound) {
+        videoOtch.dataset.galleryBound = '1';
+        videoOtch.addEventListener('click', () => {
+          gallerySection.querySelectorAll('.gallery-nav-item').forEach((el) => el.classList.remove('active'));
+          gallerySection.querySelectorAll('.gallery_swiper').forEach((el) => el.classList.remove('active'));
+          videoOtch.classList.add('active');
+          gallerySection.querySelector('.gallery-video').classList.add('active');
+        });
+      }
+      if (typeof window !== 'undefined' && window.Swiper) {
+        const photoEl = gallerySection.querySelector('.swiper.photo');
+        if (photoEl && !photoEl.swiper) {
+          new window.Swiper(photoEl, {
+            slidesPerView: 1,
+            spaceBetween: 40,
+            pagination: { el: '#gallery .photo-pagination', clickable: true },
+            navigation: { nextEl: '#gallery .photo-next', prevEl: '#gallery .photo-prev' },
+            breakpoints: { 1300: { slidesPerView: 3, slidesPerGroup: 3 } },
+          });
+        }
+        const videoEl = gallerySection.querySelector('.swiper.video-swiper');
+        if (videoEl && !videoEl.swiper) {
+          new window.Swiper(videoEl, {
+            slidesPerView: 1,
+            spaceBetween: 40,
+            pagination: { el: '#gallery .video-pagination', clickable: true },
+            navigation: { nextEl: '#gallery .video-next', prevEl: '#gallery .video-prev' },
+            breakpoints: { 1300: { slidesPerView: 3, slidesPerGroup: 3 } },
+          });
+        }
+      }
+      // Кнопка play и play/pause видео в галерее (как в main.js)
+      if (!gallerySection.dataset.videoPlayBound) {
+        gallerySection.dataset.videoPlayBound = '1';
+        gallerySection.querySelectorAll('.swiper-slide').forEach((slide) => {
+          const videoEl = slide.querySelector('.video-item');
+          const btnPlay = slide.querySelector('.gallery_video_play');
+          if (!videoEl || !btnPlay) return;
+          videoEl.addEventListener('pause', () => {
+            btnPlay.classList.remove('hidden');
+            videoEl.removeAttribute('controls');
+          });
+          videoEl.addEventListener('play', () => {
+            btnPlay.classList.add('hidden');
+            videoEl.setAttribute('controls', '');
+          });
+          btnPlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (videoEl.paused) {
+              videoEl.play();
+            } else {
+              videoEl.pause();
+            }
+          });
+        });
+      }
+    }
+    const galleryInterval = setInterval(() => {
+      galleryTries += 1;
+      initGalleryPage();
+      const section = document.querySelector('#gallery');
+      const photoDone = section?.querySelector('.swiper.photo')?.swiper;
+      const videoDone = section?.querySelector('.swiper.video-swiper')?.swiper;
+      if ((section && photoDone && videoDone) || galleryTries > GALLERY_POLL_MAX) clearInterval(galleryInterval);
+    }, 100);
+
+    // Слайдер «Другие статьи» на странице поста (.article-slider)
+    function initArticleSlider() {
+      const articleSlider = document.querySelector('.article-slider');
+      if (!articleSlider || articleSlider.dataset.articleSliderBound === '1') return;
+      const activeContent = articleSlider.querySelector('.article-slide-content.active');
+      if (activeContent) {
+        articleSlider.style.height = activeContent.clientHeight + 'px';
+      }
+      articleSlider.dataset.articleSliderBound = '1';
+      articleSlider.querySelectorAll('.article-slide').forEach((slide) => {
+        const description = slide.querySelector('.article-slide-content');
+        const btn = slide.querySelector('.article-slide-btn');
+        if (!description || !btn) return;
+        btn.addEventListener('click', () => {
+          articleSlider.querySelectorAll('.article-slide').forEach((s) => {
+            s.querySelector('.article-slide-content')?.classList.remove('active');
+            s.querySelector('.article-slide-btn')?.classList.remove('active');
+          });
+          articleSlider.style.height = description.clientHeight + 'px';
+          description.classList.add('active');
+          btn.classList.add('active');
+        });
+      });
+      window.addEventListener('scroll', () => {
+        const active = articleSlider.querySelector('.article-slide-content.active');
+        if (active) articleSlider.style.height = active.clientHeight + 'px';
+      });
+      window.addEventListener('resize', () => {
+        const active = articleSlider.querySelector('.article-slide-content.active');
+        if (active) articleSlider.style.height = active.clientHeight + 'px';
+      });
+    }
+    let articleTries = 0;
+    const articleInterval = setInterval(() => {
+      articleTries += 1;
+      initArticleSlider();
+      if (document.querySelector('.article-slider')?.dataset?.articleSliderBound === '1' || articleTries > 30) clearInterval(articleInterval);
+    }, 100);
 
     // SEO-блок: кнопка «Читать далее» раскрывает/сворачивает текст (главная — .seo_block-subtitle-expandable, страницы Окантовка/Фурнитура — .seo_block-subtitle)
     function handleSeoBtnClick(e) {
@@ -328,6 +534,10 @@ export default function ThemeScripts() {
 
     return () => {
       document.body.removeEventListener('click', handleSeoBtnClick);
+      clearInterval(stocksInterval);
+      clearInterval(reviewInterval);
+      clearInterval(galleryInterval);
+      clearInterval(articleInterval);
     };
   }, []);
 

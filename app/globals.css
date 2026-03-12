@@ -72,6 +72,24 @@ html {
   z-index: 1;
 }
 
+/* Страница «Цены»: слайдер вкладок «Стоимость мягких окон» — ширина и сдвиг задаются в ThemeScripts (px) */
+
+/* Блок акций /stocks — как в оригинале: тот же layout, что у #works (.swiper.works) */
+#stocks .works__content-slider {
+  max-width: 100%;
+  height: auto;
+  min-width: 100%;
+}
+#stocks .swiper-wrapper {
+  width: max-content;
+}
+#stocks .swiper-wrapper .swiper-slide img {
+  max-height: 400px;
+}
+#stocks .works-pagination .swiper-pagination-bullet {
+  cursor: pointer;
+}
+
 /* Видеослайдер — как в docs/main/video.html, docs/reviews.html */
 .vslider-wrap {
   max-width: 900px;
