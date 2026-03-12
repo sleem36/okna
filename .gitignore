@@ -34,3 +34,6 @@ Thumbs.db
 # локальные/конфиденциальные (не пушить в репозиторий)
 prompt.txt
 WordPress.2026-03-11.xml
+
+# reference HTML/docs (local only)
+docs
