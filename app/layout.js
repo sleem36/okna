@@ -1,4 +1,5 @@
 import './globals.css';
+import { Montserrat } from 'next/font/google';
 import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -6,6 +7,13 @@ import Preloader from '../components/Preloader';
 import ThemeScripts from '../components/ThemeScripts';
 import data from '../lib/data';
 import site from '../lib/site';
+
+const montserrat = Montserrat({
+  subsets: ['cyrillic', 'latin'],
+  weight: ['400', '600', '700'],
+  display: 'swap',
+  variable: '--font-montserrat',
+});
 
 export const metadata = {
   title: {
@@ -40,14 +48,14 @@ export default function RootLayout({ children }) {
   const menus = data.getMenus();
   const siteConfig = site.getSiteConfig();
   return (
-    <html lang="ru">
+    <html lang="ru" className={montserrat.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="yandex-verification" content="0775512b50f30523" />
         <link rel="stylesheet" href="/theme/libs/swiper/swiper.css" />
         <link rel="stylesheet" href="/theme/css/style.css" />
       </head>
-      <body>
+      <body className={montserrat.className}>
         <Script src="/theme/libs/swiper/swiper.js" strategy="beforeInteractive" />
         <Preloader />
         <Header menus={menus} site={siteConfig} />

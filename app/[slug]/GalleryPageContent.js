@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import HeroSection from '../../components/HeroSection';
+import ContactFormSection from '../../components/ContactFormSection';
 
 const GALLERY_HERO = {
   title: 'Галерея',
@@ -36,39 +37,14 @@ const NavSvgNext = () => (
   </svg>
 );
 
+const HERO_IMG_STYLE = { width: '89%', height: '104%', objectFit: 'cover' };
+
 export default function GalleryPageContent() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Галерея' }]} />
 
-      <section id="win_main">
-        <div className="container">
-          <div className="main__wrapper">
-            <div className="main__block">
-              <div className="main__text">
-                <div className="main__text-title">
-                  <div className="panel__text mobile_title">{GALLERY_HERO.panelText}</div>
-                  <h1>{GALLERY_HERO.title}</h1>
-                </div>
-              </div>
-              <div className="main__img">
-                <img src={GALLERY_HERO.img} alt="" style={{ width: '89%', height: '104%', objectFit: 'cover' }} />
-              </div>
-            </div>
-            <div className="main__panel">
-              <div className="panel__wrapper">
-                <Link href={GALLERY_HERO.buttonHref} className="panel__btn">
-                  <div>{GALLERY_HERO.buttonText}</div>
-                </Link>
-                <div className="panel__arrow">
-                  <img src="/theme/img/mainArrow.svg" alt="" />
-                </div>
-                <div className="panel__text">{GALLERY_HERO.panelText}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection {...GALLERY_HERO} imgStyle={HERO_IMG_STYLE} />
 
       <section id="gallery">
         <div className="container">
@@ -118,27 +94,7 @@ export default function GalleryPageContent() {
         </div>
       </section>
 
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p></p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">Оставить заявку</button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactFormSection />
     </>
   );
 }

@@ -170,3 +170,39 @@ html {
     font-size: 14px;
   }
 }
+
+.form-notification {
+  display: none;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.4;
+  animation: formNoteFadeIn 0.3s ease;
+}
+.form-notification--success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+.form-notification--error {
+  background: #fbe9e7;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+@keyframes formNoteFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Article slider: prevent invisible slides from stealing clicks */
+.article-slide-content {
+  pointer-events: none;
+}
+.article-slide-content.active {
+  pointer-events: auto;
+}
+.article-slide-btn {
+  position: relative;
+  z-index: 10;
+}

@@ -1,53 +1,11 @@
 import Link from 'next/link';
+import { SITE_MENU } from '../lib/menu-data';
 
-// Структура футера как в docs/main/footer.html — все ссылки и названия
-const FOOTER_NAV = [
-  {
-    title: 'Продукция',
-    link: null,
-    children: [
-      { title: 'Окантовка', href: '/myagkie-okna-s-okantovkoy' },
-      { title: 'Фурнитура', href: '/furnitura-dlya-myagkikh-okon' },
-      { title: 'Мягкие двери', href: '/myagkie-okna-dver' },
-    ],
-  },
-  {
-    title: 'Услуги',
-    link: null,
-    children: [
-      { title: 'Доставка мягких окон', href: '/dostavka-myagkih-okon' },
-      { title: 'Замер мягких окон', href: '/zamer-myagkih-okon' },
-      { title: 'Монтаж мягких окон', href: '/montazh-myagkih-okon' },
-    ],
-  },
-  {
-    title: 'Наши работы',
-    link: '/our_works',
-    children: null,
-  },
-  {
-    title: 'О компании',
-    link: null,
-    children: [
-      { title: 'Цены', href: '/myagkie-okna-czena' },
-      { title: 'Акции', href: '/stocks' },
-      { title: 'Как заказать', href: '/how_order' },
-      { title: 'Отзывы', href: '/reviews' },
-      { title: 'Галерея', href: '/gallery' },
-      { title: 'Статьи', href: '/blog' },
-    ],
-  },
-  {
-    title: 'Калькулятор',
-    link: null,
-    children: null,
-  },
-  {
-    title: 'Контакты',
-    link: '/contacts',
-    children: null,
-  },
-];
+const FOOTER_NAV = SITE_MENU.map((item) => ({
+  title: item.title,
+  link: item.url || null,
+  children: item.children && item.children.length > 0 ? item.children : null,
+}));
 
 export default function Footer({ site = {} }) {
   const contacts = site.contacts || {};
@@ -64,7 +22,7 @@ export default function Footer({ site = {} }) {
       <div className="container">
         <div className="logo">
           <Link href="/">
-            <img src={logo} alt="" />
+            <img src={logo} alt="Мягкие окна Стиль" />
             {name}
           </Link>
         </div>
@@ -105,7 +63,7 @@ export default function Footer({ site = {} }) {
             <div className="copyright">{copyright}</div>
             <div className="header-phone" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex' }}>
-                <img src="/theme/img/phone.png" alt="" />
+                <img src="/theme/img/phone.png" alt="Телефон" />
                 <a href={`tel:${phone.replace(/\s/g, '')}`}>
                   <span>+7 (925) </span>000 99 77
                 </a>
@@ -115,17 +73,17 @@ export default function Footer({ site = {} }) {
             </div>
             <div className="footer-social">
               <a href={contacts.whatsapp || 'https://wa.me/+79250009977'} target="_blank" rel="noreferrer">
-                <img src="/theme/img/watsap.svg" alt="whatsapp" />
+                <img src="/theme/img/watsap.svg" alt="WhatsApp" />
               </a>
               <a href={contacts.tg || 'https://t.me/+79250009977'} target="_blank" rel="noreferrer">
-                <img src="/theme/img/telegram.svg" alt="telegram" />
+                <img src="/theme/img/telegram.svg" alt="Telegram" />
               </a>
             </div>
           </div>
           <div className="developer">
             Разработка сайта:
             <a href="https://your-startup.space/" target="_blank" rel="noreferrer">
-              <img src="/theme/img/startup.svg" alt="" />
+              <img src="/theme/img/startup.svg" alt="Your Startup" />
             </a>
           </div>
         </div>

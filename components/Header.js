@@ -1,56 +1,7 @@
 import Link from 'next/link';
+import { SITE_MENU } from '../lib/menu-data';
 
-/**
- * Меню шапки — в точности как в docs/main/head.html:
- * 6 пунктов: Продукция, Услуги, Наши работы, О компании, Калькулятор, Контакты.
- */
-const HEADER_MENU = [
-  {
-    title: 'Продукция',
-    url: null,
-    children: [
-      { title: 'Окантовка', href: '/myagkie-okna-s-okantovkoy' },
-      { title: 'Фурнитура', href: '/furnitura-dlya-myagkikh-okon' },
-      { title: 'Мягкие двери', href: '/myagkie-okna-dver' },
-    ],
-  },
-  {
-    title: 'Услуги',
-    url: null,
-    children: [
-      { title: 'Доставка мягких окон', href: '/dostavka-myagkih-okon' },
-      { title: 'Замер мягких окон', href: '/zamer-myagkih-okon' },
-      { title: 'Монтаж мягких окон', href: '/montazh-myagkih-okon' },
-    ],
-  },
-  {
-    title: 'Наши работы',
-    url: '/our_works',
-    children: [],
-  },
-  {
-    title: 'О компании',
-    url: null,
-    children: [
-      { title: 'Цены', href: '/myagkie-okna-czena' },
-      { title: 'Акции', href: '/stocks' },
-      { title: 'Как заказать', href: '/how_order' },
-      { title: 'Отзывы', href: '/reviews' },
-      { title: 'Галерея', href: '/gallery' },
-      { title: 'Статьи', href: '/blog' },
-    ],
-  },
-  {
-    title: 'Калькулятор',
-    url: '/#calculate',
-    children: [],
-  },
-  {
-    title: 'Контакты',
-    url: '/contacts',
-    children: [],
-  },
-];
+const HEADER_MENU = SITE_MENU;
 
 function NavItem({ item }) {
   const hasChildren = item.children && item.children.length > 0;
@@ -144,8 +95,8 @@ export default function Header({ site = {} }) {
           <div className="logo">
             <Link href="/">
               {(contacts.logo && (
-                <img src={contacts.logo} alt="" />
-              )) || <img src="/uploads/2023/05/logo.png" alt="" />}
+                <img src={contacts.logo} alt="Мягкие окна Стиль" />
+              )) || <img src="/uploads/2023/05/logo.png" alt="Мягкие окна Стиль" />}
               {contacts.name || 'ИЗГОТОВЛЕНИЕ И УСТАНОВКА МЯГКИХ ОКОН'}
             </Link>
           </div>
@@ -156,7 +107,7 @@ export default function Header({ site = {} }) {
           </div>
           <div className="header-contacts">
             <div className="header-phone">
-              <img src="/theme/img/phone.png" alt="" />
+              <img src="/theme/img/phone.png" alt="Телефон" />
               <a href={`tel:${phoneHref ? '+' + phoneHref : '+79250009977'}`}>
                 <span>{phoneSpan}</span>
                 {phoneRest}
@@ -164,10 +115,10 @@ export default function Header({ site = {} }) {
             </div>
             <div className="header-social">
               <a href={contacts.whatsapp || 'https://wa.me/+79250009977'} target="_blank" rel="noreferrer">
-                <img src="/theme/img/watsap.png" alt="whatsapp" />
+                <img src="/theme/img/watsap.png" alt="WhatsApp" />
               </a>
               <a href={contacts.tg || 'https://t.me/+79250009977'} target="_blank" rel="noreferrer">
-                <img src="/theme/img/telegram.png" alt="telegram" />
+                <img src="/theme/img/telegram.png" alt="Telegram" />
               </a>
             </div>
             <Link href="/how_order" className="header-btn">
@@ -192,15 +143,15 @@ export default function Header({ site = {} }) {
             <div className="mobile-contacts">
               <div className="header-social">
                 <a href={contacts.whatsapp || 'https://wa.me/+79250009977'} target="_blank" rel="noreferrer">
-                  <img src="/theme/img/watsap.png" alt="whatsapp" />
+                  <img src="/theme/img/watsap.png" alt="WhatsApp" />
                 </a>
                 <a href={contacts.tg || 'https://t.me/+79250009977'} target="_blank" rel="noreferrer">
-                  <img src="/theme/img/telegram.png" alt="telegram" />
+                  <img src="/theme/img/telegram.png" alt="Telegram" />
                 </a>
               </div>
               <div className="mobile-phone-box">
                 <div className="mobile-phone">
-                  <img src="/theme/img/phone.png" alt="" />
+                  <img src="/theme/img/phone.png" alt="Телефон" />
                   <a href={`tel:${phoneHref ? '+' + phoneHref : '+79250009977'}`}>
                     <span>{phoneSpan}</span>
                     {phoneRest}

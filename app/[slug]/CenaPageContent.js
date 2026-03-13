@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import HeroSection from '../../components/HeroSection';
+import ContactFormSection from '../../components/ContactFormSection';
+import CalculatorSection from '../../components/CalculatorSection';
+import SeoBlock from '../../components/SeoBlock';
 import {
   CENA_HERO,
   CENA_COST_TABS,
@@ -19,39 +23,14 @@ import {
   CENA_SEO_HTML,
 } from '../../lib/cena-page-data';
 
+const HERO_IMG_STYLE = { width: '89%', height: '104%', objectFit: 'cover' };
+
 export default function CenaPageContent() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Цены' }]} />
 
-      <section id="win_main">
-        <div className="container">
-          <div className="main__wrapper">
-            <div className="main__block">
-              <div className="main__text">
-                <div className="main__text-title">
-                  <div className="panel__text mobile_title">{CENA_HERO.panelText}</div>
-                  <h1>{CENA_HERO.title}</h1>
-                </div>
-              </div>
-              <div className="main__img">
-                <img src={CENA_HERO.img} alt="" style={{ width: '89%', height: '104%', objectFit: 'cover' }} />
-              </div>
-            </div>
-            <div className="main__panel">
-              <div className="panel__wrapper">
-                <Link href={CENA_HERO.buttonHref} className="panel__btn">
-                  <div>{CENA_HERO.buttonText}</div>
-                </Link>
-                <div className="panel__arrow">
-                  <img src="/theme/img/mainArrow.svg" alt="" />
-                </div>
-                <div className="panel__text">{CENA_HERO.panelText}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection {...CENA_HERO} imgStyle={HERO_IMG_STYLE} />
 
       <section id="cost_furniture">
         <div className="container">
@@ -239,110 +218,9 @@ export default function CenaPageContent() {
         </div>
       </section>
 
-      <section id="calculate">
-        <div className="container">
-          <div className="calculate__wrapper">
-            <div className="calculate__title">
-              <h2><span>Рассчитайте стоимость</span> ваших мягких окон</h2>
-              <p></p>
-            </div>
-            <form className="calculate__form" id="calc1" action="#">
-              <div className="calculate__form-calculator">
-                <div className="calculate__form-title">Калькулятор стоимости</div>
-                <div className="calculate__form-block range__slider" data-min="0" data-max="100">
-                  <input type="range" className="calculate__form-inp range" defaultValue={1} max={100} min={0} />
-                  <output className="bubble">1 м²</output>
-                  <input type="text" name="meters" className="calculate__form-inp squares" placeholder="1 м²" defaultValue="1" />
-                </div>
-                <div className="form-block-title">Доставка</div>
-                <div className="calculate__form-block range__slider" data-min="0" data-max="100">
-                  <input type="range" className="calculate__form-inp range range_delivery" defaultValue={0} max={100} min={0} />
-                  <output className="bubble bubble_delivery">0 км</output>
-                  <input type="text" name="delivery" className="calculate__form-inp delivery" placeholder="0 км" defaultValue="0" />
-                </div>
-                <div className="calculate__form-block check">
-                  <div className="form-block-check">
-                    <label className="control control-checkbox">
-                      Монтаж с доставкой <img src="/theme/img/Truck.svg" alt="" />
-                      <input type="checkbox" name="montage" defaultChecked />
-                      <div className="control_indicator" />
-                    </label>
-                  </div>
-                  <p className="calculate__form-description">* Минимальная стоимость монтажа -7000 руб. Доставка в пределах МКАД+30км - 1000 руб.</p>
-                </div>
-                <div className="calculate__form-block">
-                  <div className="form-block-title">Тип крепежа:</div>
-                  <div className="form-block-type fasteners">
-                    {CENA_CALC_FASTENERS.map((f) => (
-                      <div key={f.index} data-value={f.value} data-index={f.index} data-label={f.label} className={`block-type${f.index === 0 ? ' active' : ''}`}>
-                        <img src={f.img} alt="" />
-                        {f.label}
-                      </div>
-                    ))}
-                  </div>
-                  <input type="hidden" name="krepezh_name" defaultValue={CENA_CALC_FASTENERS[0].label} />
-                  <input type="hidden" name="krepezh_price" defaultValue={String(CENA_CALC_FASTENERS[0].value)} />
-                </div>
-              </div>
-              <div className="calculate__form-order">
-                <div className="calculate__form-block">
-                  <div className="form-block-title">Молния (пг/м)</div>
-                  <input type="number" name="molnia" className="calculate__form-inp lightning" placeholder="0" defaultValue={0} />
-                </div>
-                <div className="calculate__form-block">
-                  <div className="form-block-title">Ремни для подвеса</div>
-                  <input type="number" name="remni" className="calculate__form-inp belt" placeholder="0" defaultValue={0} />
-                </div>
-                <div className="calculate__form-block">
-                  <div className="form-block-title price">
-                    Стоимость: <span>54 700 руб.</span>
-                    <input type="hidden" className="calc_price" name="calc_price" defaultValue="54700" />
-                  </div>
-                </div>
-                <div className="calculate__form-title">Оставьте заявку на точный рассчет стоимости мягких окон</div>
-                <div className="calculate__form-block">
-                  <div className="form-block-title">Ваш номер телефона</div>
-                  <div className="calc_error">Введите телефон полностью</div>
-                  <input type="tel" name="phone" required className="calculate__form-inp tel" placeholder="+7 (925) 000-99-77" />
-                </div>
-                <button type="submit" className="btn calc-btn">Оставить заявку</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p></p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">Оставить заявку</button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="container">
-          <div className="seo_block__wrapper">
-            <div className="seo_block-title"><h2></h2></div>
-            <div className="seo_block-subtitle" dangerouslySetInnerHTML={{ __html: CENA_SEO_HTML }} />
-            <div className="btn js-seo-btn">Читать далее</div>
-          </div>
-        </div>
-      </section>
+      <CalculatorSection fasteners={CENA_CALC_FASTENERS} />
+      <ContactFormSection />
+      <SeoBlock title={CENA_SEO_TITLE} html={CENA_SEO_HTML} />
     </>
   );
 }

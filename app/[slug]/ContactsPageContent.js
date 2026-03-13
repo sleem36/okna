@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import HeroSection from '../../components/HeroSection';
+import ContactFormSection from '../../components/ContactFormSection';
 
 const CONTACTS_HERO = {
   title: 'Контакты',
@@ -14,34 +15,11 @@ export default function ContactsPageContent() {
     <>
       <Breadcrumbs items={[{ label: 'Контакты' }]} />
 
-      <section id="win_main">
-        <div className="container">
-          <div className="main__wrapper all_wrapper">
-            <div className="main__block">
-              <div className="main__text contacts_main_text">
-                <div className="main__text-title">
-                  <div className="panel__text mobile_title">{CONTACTS_HERO.panelText}</div>
-                  <h1>{CONTACTS_HERO.title}</h1>
-                </div>
-              </div>
-              <div className="main__img">
-                <img src={CONTACTS_HERO.img} alt="" />
-              </div>
-            </div>
-            <div className="main__panel">
-              <div className="panel__wrapper">
-                <Link href={CONTACTS_HERO.buttonHref} className="panel__btn">
-                  <div>{CONTACTS_HERO.buttonText}</div>
-                </Link>
-                <div className="panel__arrow">
-                  <img src="/theme/img/mainArrow.svg" alt="" />
-                </div>
-                <div className="panel__text">{CONTACTS_HERO.panelText}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        {...CONTACTS_HERO}
+        wrapperClassName="main__wrapper all_wrapper"
+        textClassName="main__text contacts_main_text"
+      />
 
       <section id="contacts_comm">
         <div className="container">
@@ -54,21 +32,21 @@ export default function ContactsPageContent() {
               </div>
               <div className="contacts_comm-contacts">
                 <div className="contacts-block contacts-phone">
-                  <img src="/theme/img/Phone.svg" alt="" />
+                  <img src="/theme/img/Phone.svg" alt="Телефон" />
                   <a href="tel:+7 (925) 000 99 77 ">
                     <span>+7 (925) </span>000 99 77
                   </a>
                 </div>
                 <div className="contacts-block contacts-mail">
-                  <img src="/theme/img/mail.svg" alt="" />
+                  <img src="/theme/img/mail.svg" alt="Email" />
                   <a href="mailto:okna.stil.myagkie@yandex.ru">okna.stil.myagkie@yandex.ru</a>
                 </div>
                 <div className="contacts-block contacts-work">
-                  <img src="/theme/img/Clock.svg" alt="" />
+                  <img src="/theme/img/Clock.svg" alt="Время работы" />
                   <p>9.00 - 21.00 ежедневно</p>
                 </div>
                 <div className="contacts-block contacts-address">
-                  <img src="/theme/img/MapPin.svg" alt="" />
+                  <img src="/theme/img/MapPin.svg" alt="Адрес" />
                   <p>Московская область, г. Ногинск ул. Климова д. 50</p>
                 </div>
               </div>
@@ -84,36 +62,14 @@ export default function ContactsPageContent() {
               <iframe
                 src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=61046453372"
                 frameBorder="0"
+                title="Мягкие окна Стиль на карте"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p></p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">
-                Оставить заявку
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactFormSection />
     </>
   );
 }
-

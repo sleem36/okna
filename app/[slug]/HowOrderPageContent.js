@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import HeroSection from '../../components/HeroSection';
+import ContactFormSection from '../../components/ContactFormSection';
 
 const HOW_ORDER_HERO = {
   title: 'как заказать',
@@ -18,39 +19,14 @@ const HOW_ORDER_STEPS = [
 
 const HOW_ORDER_FOOTNOTE = 'Возможно изготовление по предоставленным вами чертежам';
 
+const HERO_IMG_STYLE = { width: '89%', height: '104%', objectFit: 'cover' };
+
 export default function HowOrderPageContent() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Как заказать' }]} />
 
-      <section id="win_main">
-        <div className="container">
-          <div className="main__wrapper">
-            <div className="main__block">
-              <div className="main__text">
-                <div className="main__text-title">
-                  <div className="panel__text mobile_title">{HOW_ORDER_HERO.panelText}</div>
-                  <h1>{HOW_ORDER_HERO.title}</h1>
-                </div>
-              </div>
-              <div className="main__img">
-                <img src={HOW_ORDER_HERO.img} alt="" style={{ width: '89%', height: '104%', objectFit: 'cover' }} />
-              </div>
-            </div>
-            <div className="main__panel">
-              <div className="panel__wrapper">
-                <Link href={HOW_ORDER_HERO.buttonHref} className="panel__btn">
-                  <div>{HOW_ORDER_HERO.buttonText}</div>
-                </Link>
-                <div className="panel__arrow">
-                  <img src="/theme/img/mainArrow.svg" alt="" />
-                </div>
-                <div className="panel__text">{HOW_ORDER_HERO.panelText}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection {...HOW_ORDER_HERO} imgStyle={HERO_IMG_STYLE} />
 
       <section id="measuring_free">
         <div className="container">
@@ -70,29 +46,7 @@ export default function HowOrderPageContent() {
         </div>
       </section>
 
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p></p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">
-                Оставить заявку
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactFormSection />
     </>
   );
 }

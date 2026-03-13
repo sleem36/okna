@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import HeroSection from '../../components/HeroSection';
+import ContactFormSection from '../../components/ContactFormSection';
 
 const STOCKS_HERO = {
   title: 'АКЦИИ Для новых клиентов',
@@ -16,39 +17,14 @@ const STOCKS_SLIDES = [
   { img: '/uploads/2024/08/4-1.jpg', title: 'Оставьте отзыв получите кэшбэк 2%' },
 ];
 
+const HERO_IMG_STYLE = { width: '89%', height: '104%', objectFit: 'cover' };
+
 export default function StocksPageContent() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Акции' }]} />
 
-      <section id="win_main">
-        <div className="container">
-          <div className="main__wrapper">
-            <div className="main__block">
-              <div className="main__text">
-                <div className="main__text-title">
-                  <div className="panel__text mobile_title">{STOCKS_HERO.panelText}</div>
-                  <h1>{STOCKS_HERO.title}</h1>
-                </div>
-              </div>
-              <div className="main__img">
-                <img src={STOCKS_HERO.img} alt="" style={{ width: '89%', height: '104%', objectFit: 'cover' }} />
-              </div>
-            </div>
-            <div className="main__panel">
-              <div className="panel__wrapper">
-                <Link href={STOCKS_HERO.buttonHref} className="panel__btn">
-                  <div>{STOCKS_HERO.buttonText}</div>
-                </Link>
-                <div className="panel__arrow">
-                  <img src="/theme/img/mainArrow.svg" alt="" />
-                </div>
-                <div className="panel__text">{STOCKS_HERO.panelText}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection {...STOCKS_HERO} imgStyle={HERO_IMG_STYLE} />
 
       <section id="stocks">
         <div className="container">
@@ -81,27 +57,7 @@ export default function StocksPageContent() {
         </div>
       </section>
 
-      <section id="contacts_order">
-        <div className="container">
-          <div className="price_window_order contacts_order">
-            <div className="price_window_order-title">
-              <h3>Оставить заявку на консультацию</h3>
-              <p>Производитель мягких окон от 1100 рублей за кв. метр.</p>
-            </div>
-            <form className="price_window_form main_form contacts_form" id="main2" action="#">
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="text" name="name" required maxLength={35} />
-                <span className="floating-label floating-label-name">Имя</span>
-              </div>
-              <div className="price_window_form-inp contacts_form-inp">
-                <input type="tel" name="phone" required />
-                <span className="floating-label floating-label-name">Номер телефона</span>
-              </div>
-              <button type="submit" className="btn price_window_form-btn contacts_form-btn">Оставить заявку</button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactFormSection subtitle="Производитель мягких окон от 1100 рублей за кв. метр." />
     </>
   );
 }

@@ -37,3 +37,7 @@ WordPress.2026-03-11.xml
 
 # reference HTML/docs (local only)
 docs
+
+# server config & archives
+.htaccess
+*.zip
