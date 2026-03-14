@@ -1,10 +1,8 @@
-# Пароль только для страниц; /_next/ без пароля, иначе ChunkLoadError
-<LocationMatch "^/(?!_next/)">
-  AuthType Basic
-  AuthName "Restricted Access"
-  AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
-  Require valid-user
-</LocationMatch>
+# Basic Auth (при включении возможен ChunkLoadError — отключите на время проверки)
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
+Require valid-user
 
 PassengerNodejs /home/c/c59840wv/.local/bin/node
 PassengerAppRoot /home/c/c59840wv/test/public_html
