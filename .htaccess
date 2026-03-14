@@ -1,12 +1,10 @@
-# Basic Auth: статика /_next/ — без пароля (иначе ChunkLoadError), остальное — с паролем
-SetEnvIf Request_URI "^/_next/" let_static_through
-AuthType Basic
-AuthName "Restricted Access"
-AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
-<RequireAny>
-  Require env=let_static_through
+# Пароль только для страниц; /_next/ без пароля, иначе ChunkLoadError
+<LocationMatch "^/(?!_next/)">
+  AuthType Basic
+  AuthName "Restricted Access"
+  AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
   Require valid-user
-</RequireAny>
+</LocationMatch>
 
 PassengerNodejs /home/c/c59840wv/.local/bin/node
 PassengerAppRoot /home/c/c59840wv/test/public_html
