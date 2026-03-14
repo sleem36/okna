@@ -9,3 +9,6 @@ PassengerAppType node
 PassengerStartupFile app.js
 PassengerAppEnv production
 PassengerFriendlyErrorPages on
+
+# Не искать файлы на диске — все запросы отдавать Node (Passenger)
+Options -MultiViews
