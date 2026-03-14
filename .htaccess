@@ -1,11 +1,12 @@
-# Статика Next.js (_next/static, _next/image) — без авторизации, иначе чанки не грузятся (ChunkLoadError)
+# Basic Auth: статика /_next/ — без пароля (иначе ChunkLoadError), остальное — с паролем
 SetEnvIf Request_URI "^/_next/" let_static_through
 AuthType Basic
 AuthName "Restricted Access"
 AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
-Satisfy Any
-Require env=let_static_through
-Require valid-user
+<RequireAny>
+  Require env=let_static_through
+  Require valid-user
+</RequireAny>
 
 PassengerNodejs /home/c/c59840wv/.local/bin/node
 PassengerAppRoot /home/c/c59840wv/test/public_html
