@@ -38,11 +38,23 @@ export default function useFormSubmit() {
           const phone = (formData.get("phone") || "").toString();
           const message = (formData.get("message") || "").toString();
           const page = window.location?.pathname || "";
+          const isCalc = form.id === "calc1";
+          const formId = isCalc ? "Калькулятор" : (form.id || "");
+          const payload = { name, phone, message, page, formId };
+          if (isCalc) {
+            payload.calc_price = (formData.get("calc_price") || "").toString();
+            payload.meters = (formData.get("meters") || "").toString();
+            payload.delivery = (formData.get("delivery") || "").toString();
+            payload.krepezh_name = (formData.get("krepezh_name") || "").toString();
+            payload.molnia = (formData.get("molnia") || "").toString();
+            payload.remni = (formData.get("remni") || "").toString();
+            payload.montage = formData.get("montage") ? "да" : "нет";
+          }
           try {
             const res = await fetch("/api/contact", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ name, phone, message, page, formId: form.id || "" }),
+              body: JSON.stringify(payload),
             });
             if (res.ok) {
               form.reset();

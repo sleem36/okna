@@ -37,7 +37,15 @@ export async function POST(req) {
       });
     }
 
-    const { name = '', phone = '', message = '', page = '', formId = '' } = await req.json();
+    const body = await req.json();
+    const { name = '', phone = '', message = '', page = '', formId = '' } = body;
+    const calc_price = body.calc_price || '';
+    const meters = body.meters || '';
+    const delivery = body.delivery || '';
+    const krepezh_name = body.krepezh_name || '';
+    const molnia = body.molnia || '';
+    const remni = body.remni || '';
+    const montage = body.montage || '';
 
     if (!phone && !name) {
       return new Response(JSON.stringify({ ok: false, error: 'empty' }), {
@@ -70,15 +78,25 @@ export async function POST(req) {
     });
 
     const subject = `Заявка с сайта Мягкие окна Стиль (${page || 'без указания страницы'})`;
-    const text = [
+    const lines = [
       `Имя: ${name || '—'}`,
       `Телефон: ${phone || '—'}`,
       message ? `Сообщение: ${message}` : '',
       page ? `Страница: ${page}` : '',
       formId ? `Форма: ${formId}` : '',
-    ]
-      .filter(Boolean)
-      .join('\n');
+    ];
+    if (formId === 'Калькулятор' && (calc_price || meters || delivery || krepezh_name)) {
+      lines.push('');
+      lines.push('Данные калькулятора:');
+      if (calc_price) lines.push(`  Стоимость: ${calc_price} руб.`);
+      if (meters) lines.push(`  Площадь: ${meters}`);
+      if (delivery) lines.push(`  Доставка: ${delivery}`);
+      if (krepezh_name) lines.push(`  Крепёж: ${krepezh_name}`);
+      if (montage) lines.push(`  Монтаж с доставкой: ${montage}`);
+      if (molnia) lines.push(`  Молния (пг/м): ${molnia}`);
+      if (remni) lines.push(`  Ремни для подвеса: ${remni}`);
+    }
+    const text = lines.filter(Boolean).join('\n');
 
     await transporter.sendMail({
       from,
