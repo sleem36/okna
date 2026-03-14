@@ -6,6 +6,7 @@ import WorksSection from '../../components/WorksSection';
 import ReviewsSection from '../../components/ReviewsSection';
 import CalculatorSection from '../../components/CalculatorSection';
 import SeoBlock from '../../components/SeoBlock';
+import ProductCatalog from '../../components/ProductCatalog';
 import {
   EDGING_HERO,
   EDGING_EO_TITLE,
@@ -13,6 +14,7 @@ import {
   EDGING_OTHER_MATERIALS,
   EDGING_COST_BLOCKS,
   EDGING_COST_FOOTNOTE,
+  EDGING_CATALOG_ITEMS,
   EDGING_SEO_TITLE,
   EDGING_SEO_HTML,
 } from '../../lib/edging-page-data';
@@ -93,6 +95,8 @@ export default function EdgingPageContent() {
 
       <WorksSection />
       <ReviewsSection />
+
+      <ProductCatalog items={EDGING_CATALOG_ITEMS} title="Каталог товаров" />
 
       <section id="cost_furniture">
         <div className="container">

@@ -49,12 +49,13 @@ export async function POST(req) {
     const host = process.env.SMTP_HOST;
     const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
     const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
+    const pass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
     const to = process.env.CONTACT_TO || user;
-    const from = process.env.CONTACT_FROM || user;
+    const from = process.env.CONTACT_FROM || process.env.SMTP_FROM || user;
+    const secure = process.env.SMTP_SECURE === 'true' || port === 465;
 
     if (!host || !user || !pass || !to) {
-      console.error('SMTP is not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO');
+      console.error('SMTP is not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS (или SMTP_PASSWORD), CONTACT_TO');
       return new Response(JSON.stringify({ ok: false, error: 'smtp_not_configured' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -64,7 +65,7 @@ export async function POST(req) {
     const transporter = nodemailer.createTransport({
       host,
       port,
-      secure: port === 465,
+      secure,
       auth: { user, pass },
     });
 

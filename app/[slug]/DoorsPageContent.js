@@ -6,6 +6,7 @@ import WorksSection from '../../components/WorksSection';
 import ReviewsSection from '../../components/ReviewsSection';
 import CalculatorSection from '../../components/CalculatorSection';
 import SeoBlock from '../../components/SeoBlock';
+import ProductCatalog from '../../components/ProductCatalog';
 import {
   DOORS_HERO,
   DOORS_HO,
@@ -14,6 +15,7 @@ import {
   DOORS_COST_TITLE,
   DOORS_COST_BLOCKS,
   DOORS_COST_FOOTNOTE,
+  DOORS_CATALOG_ITEMS,
   DOORS_SEO_TITLE,
   DOORS_SEO_HTML,
 } from '../../lib/doors-page-data';
@@ -77,6 +79,8 @@ export default function DoorsPageContent() {
 
       <WorksSection />
       <ReviewsSection />
+
+      <ProductCatalog items={DOORS_CATALOG_ITEMS} title="Каталог товаров" />
 
       <section id="cost_furniture">
         <div className="container">

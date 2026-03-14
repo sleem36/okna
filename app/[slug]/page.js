@@ -195,6 +195,9 @@ export default function PageBySlug({ params }) {
   }
   const page = data.getPageBySlug(params.slug);
   if (!page) notFound();
+  // Страницы-заглушки без контента (только title из меню/SEO) — показываем 404
+  const hasContent = (page.content && page.content.trim()) || (page.excerpt && page.excerpt.trim());
+  if (!hasContent) notFound();
 
   const panelText =
     page.excerpt || "Производитель мягких окон от 1100 рублей за кв. метр.";

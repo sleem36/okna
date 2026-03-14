@@ -13,8 +13,8 @@
     "time": "3 Дня",
     "width": "700 мкм",
     "furnitureText": "Скоба поворотная металлическая",
-    "imagePath": "/uploads/2023/05/пер.jpg",
-    "imagePath2": "/uploads/2023/05/втора.jpg",
+    "imagePath": "/uploads/2023/05/per.jpg",
+    "imagePath2": "/uploads/2023/05/vtora.jpg",
     "imagePath3": null
   },
   {
@@ -762,7 +762,7 @@
     "text": "Мягкие окна арочного типа из эластичного полиуретана",
     "edgingType": "premium",
     "mountBase": "metal",
-    "material": "pvh",
+    "material": "poly",
     "edgingText": "Темно-Коричневый ПВХ",
     "type": "dachi",
     "areaS": "27 кв/м",

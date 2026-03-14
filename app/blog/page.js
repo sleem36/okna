@@ -122,7 +122,6 @@ export default function BlogPage() {
           <div className="price_window_order contacts_order">
             <div className="price_window_order-title">
               <h3>Оставить заявку на консультацию</h3>
-              <p></p>
             </div>
             <form
               className="price_window_form main_form contacts_form"
@@ -145,6 +144,10 @@ export default function BlogPage() {
               >
                 Оставить заявку
               </button>
+              <p className="form-consent">
+                Нажимая на кнопку, Вы соглашаетесь на{' '}
+                <a href="/privacy">обработку своих данных</a>
+              </p>
             </form>
           </div>
         </div>

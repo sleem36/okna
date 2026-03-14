@@ -175,6 +175,10 @@ export default async function OurWorkDetailPage({ params }) {
               >
                 Оставить заявку
               </button>
+              <p className="form-consent">
+                Нажимая на кнопку, Вы соглашаетесь на{' '}
+                <a href="/privacy">обработку своих данных</a>
+              </p>
             </form>
           </div>
         </div>

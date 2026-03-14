@@ -15,7 +15,7 @@ export default function Footer({ site = {} }) {
   const address = contacts.address || 'Московская область, г. Ногинск ул. Климова д. 50';
   const footerWindow = contacts.footerWindow || 'Мягкие окна «Стиль» - производство и монтаж мягких окон';
   const copyright = contacts.copyright || 'Все права защищены © 2017 – 2025 ИП Шагалкина Яна Анатольевна. Цены на сайте для ознакомления — не являются публичной офертой, определяемой положениями статьи 437 Гражданского кодекса Российской Федерации. Компания оставляет за собой права без уведомления пользователя изменять цены на сайте.';
-  const policyHref = contacts.policyHref || '/uploads/2023/06/Политика-конфиденциальности.docx';
+  const policyHref = contacts.policyHref || '/privacy';
 
   return (
     <footer>

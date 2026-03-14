@@ -6,12 +6,14 @@ import WorksSection from '../../components/WorksSection';
 import ReviewsSection from '../../components/ReviewsSection';
 import CalculatorSection from '../../components/CalculatorSection';
 import SeoBlock from '../../components/SeoBlock';
+import ProductCatalog from '../../components/ProductCatalog';
 import {
   FURNITURA_HERO,
   FURNITURA_HO,
   FURNITURA_HO_ITEMS,
   FURNITURA_OTHER_MATERIALS,
   FURNITURA_COST_BLOCKS,
+  FURNITURA_CATALOG_ITEMS,
   FURNITURA_SEO_TITLE,
   FURNITURA_SEO_HTML,
 } from '../../lib/furnitura-page-data';
@@ -75,6 +77,8 @@ export default function FurnituraPageContent() {
 
       <WorksSection />
       <ReviewsSection />
+
+      <ProductCatalog items={FURNITURA_CATALOG_ITEMS} title="Каталог товаров" />
 
       <section id="cost_furniture">
         <div className="container">

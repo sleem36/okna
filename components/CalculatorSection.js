@@ -69,6 +69,10 @@ export default function CalculatorSection({ fasteners = DEFAULT_CALC_FASTENERS }
                 <input type="tel" name="phone" required className="calculate__form-inp tel" placeholder="+7 (925) 000-99-77" />
               </div>
               <button type="submit" className="btn calc-btn">Оставить заявку</button>
+              <p className="form-consent">
+                Нажимая на кнопку, Вы соглашаетесь на{' '}
+                <a href="/privacy">обработку своих данных</a>
+              </p>
             </div>
           </form>
         </div>

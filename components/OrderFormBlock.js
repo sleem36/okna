@@ -20,6 +20,10 @@ export default function OrderFormBlock({ title = 'Не смогли опреде
             <button type="submit" className="btn price_window_form-btn contacts_form-btn">
               Оставить заявку
             </button>
+            <p className="form-consent">
+              Нажимая на кнопку, Вы соглашаетесь на{' '}
+              <a href="/privacy">обработку своих данных</a>
+            </p>
           </form>
         </div>
       </div>

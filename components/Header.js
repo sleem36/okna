@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { SITE_MENU } from '../lib/menu-data';
+import SearchTrigger from './SearchTrigger';
+import OrderFormTrigger from './OrderFormTrigger';
 
 const HEADER_MENU = SITE_MENU;
 
@@ -121,9 +123,8 @@ export default function Header({ site = {} }) {
                 <img src="/theme/img/telegram.png" alt="Telegram" />
               </a>
             </div>
-            <Link href="/how_order" className="header-btn">
-              Оставить заявку
-            </Link>
+            <SearchTrigger />
+            <OrderFormTrigger className="header-btn" />
           </div>
           <div className="header__burger" aria-label="Меню">
             <span className="header__burger-top" />
@@ -141,6 +142,9 @@ export default function Header({ site = {} }) {
               ))}
             </div>
             <div className="mobile-contacts">
+              <div className="header-search header-search--mobile">
+                <SearchTrigger />
+              </div>
               <div className="header-social">
                 <a href={contacts.whatsapp || 'https://wa.me/+79250009977'} target="_blank" rel="noreferrer">
                   <img src="/theme/img/watsap.png" alt="WhatsApp" />
@@ -157,9 +161,7 @@ export default function Header({ site = {} }) {
                     {phoneRest}
                   </a>
                 </div>
-                <Link href="/how_order" className="header-btn mobile-btn">
-                  Оставить заявку
-                </Link>
+                <OrderFormTrigger className="header-btn mobile-btn" />
               </div>
             </div>
           </div>

@@ -13,12 +13,19 @@ import {
 const FILTER_KEYS = ['standart', 'luxe', 'premium', 'wood', 'metal', 'brick', 'pvh', 'poly', 'tone'];
 const INIT_FILTER = Object.fromEntries(FILTER_KEYS.map((k) => [k, false]));
 
+/** Нормализация значения окантовки (standard/standart и т.д.) */
+function normalizeEdging(v) {
+  if (!v || typeof v !== 'string') return '';
+  const s = v.trim().toLowerCase();
+  return s === 'standard' ? 'standart' : s;
+}
+
 function applyFilter(slides, filterState) {
   const edging = ['standart', 'luxe', 'premium'].filter((k) => filterState[k]);
   const mount = ['wood', 'metal', 'brick'].filter((k) => filterState[k]);
   const material = ['pvh', 'poly', 'tone'].filter((k) => filterState[k]);
   return slides.filter((slide) => {
-    if (edging.length && !edging.includes(slide.edgingType)) return false;
+    if (edging.length && !edging.includes(normalizeEdging(slide.edgingType))) return false;
     if (mount.length && !mount.includes(slide.mountBase)) return false;
     if (material.length && !material.includes(slide.material)) return false;
     return true;
@@ -218,7 +225,6 @@ export default function OurWorksPageContent() {
           <div className="price_window_order contacts_order">
             <div className="price_window_order-title">
               <h3>Оставить заявку на консультацию</h3>
-              <p>Производитель мягких окон от 1100 рублей за кв. метр.</p>
             </div>
             <form className="price_window_form main_form contacts_form" id="main2" action="#">
               <div className="price_window_form-inp contacts_form-inp">
@@ -232,6 +238,10 @@ export default function OurWorksPageContent() {
               <button type="submit" className="btn price_window_form-btn contacts_form-btn">
                 Оставить заявку
               </button>
+              <p className="form-consent">
+                Нажимая на кнопку, Вы соглашаетесь на{' '}
+                <a href="/privacy">обработку своих данных</a>
+              </p>
             </form>
           </div>
         </div>

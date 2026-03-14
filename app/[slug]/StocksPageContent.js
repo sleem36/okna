@@ -57,7 +57,7 @@ export default function StocksPageContent() {
         </div>
       </section>
 
-      <ContactFormSection subtitle="Производитель мягких окон от 1100 рублей за кв. метр." />
+      <ContactFormSection />
     </>
   );
 }

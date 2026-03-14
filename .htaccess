@@ -1,0 +1,11 @@
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /home/c/c59840wv/test/public_html/.htpasswd
+Require valid-user
+
+PassengerNodejs /home/c/c59840wv/.local/bin/node
+PassengerAppRoot /home/c/c59840wv/test/public_html
+PassengerAppType node
+PassengerStartupFile app.js
+PassengerAppEnv production
+PassengerFriendlyErrorPages on

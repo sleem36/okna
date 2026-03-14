@@ -206,3 +206,455 @@ html {
   position: relative;
   z-index: 10;
 }
+
+/* Кнопка «Наверх» — справа внизу */
+.scroll-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #2e7d32;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s, transform 0.2s;
+}
+.scroll-to-top:hover {
+  background: #1b5e20;
+  transform: scale(1.05);
+}
+.scroll-to-top__icon {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* Поиск в шапке */
+.header-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.header-search__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #263238;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.header-search__btn:hover {
+  background: rgba(75, 0, 130, 0.08);
+  color: #4B0082;
+}
+.header-search--mobile {
+  margin-bottom: 8px;
+}
+.header-search--mobile .header-search__btn {
+  width: 44px;
+  height: 44px;
+}
+
+.search-overlay {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  width: min(360px, calc(100vw - 24px));
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+}
+.search-overlay__box {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+.search-overlay__input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+.search-overlay__input:focus {
+  border-color: #4B0082;
+  box-shadow: 0 0 0 2px rgba(75, 0, 130, 0.15);
+}
+.search-overlay__loading {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #888;
+}
+.search-overlay__results {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.search-overlay__hint {
+  padding: 16px 16px 8px;
+  margin: 0;
+  font-size: 14px;
+  color: #888;
+}
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.search-results__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #263238;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.search-results__link:hover {
+  background: rgba(75, 0, 130, 0.08);
+  color: #4B0082;
+}
+.search-results__title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-results__type {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.search-results__type--post { color: #2e7d32; }
+.search-results__type--work { color: #1565c0; }
+
+/* Согласие на формах (Политика сбора данных) */
+.form-consent {
+  margin: 12px 0 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+}
+.form-consent a {
+  color: #4B0082;
+  text-decoration: underline;
+}
+.form-consent a:hover {
+  color: #6a0dad;
+}
+.order-popup-content .form-consent {
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+/* Кнопка «Оставить заявку» в шапке — как ссылка */
+button.header-btn {
+  background: transparent;
+  border: 1px solid #D2691E;
+  color: #D2691E;
+  font: inherit;
+}
+button.header-btn:hover {
+  background: rgba(210, 105, 30, 0.08);
+}
+
+/* Попап «Оставить заявку» */
+.order-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: popupFadeIn 0.2s ease;
+}
+@keyframes popupFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.order-popup-box {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  animation: popupSlideIn 0.25s ease;
+}
+@keyframes popupSlideIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.order-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.order-popup-close:hover {
+  background: #f0f0f0;
+  color: #263238;
+}
+.order-popup-content {
+  padding: 32px 24px 24px;
+}
+.order-popup-title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #263238;
+}
+.order-popup-subtitle {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+.order-popup-content .price_window_form {
+  width: 100% !important;
+  min-width: 0;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.order-popup-content .price_window_form-inp {
+  margin-bottom: 16px;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 56px;
+}
+.order-popup-content .price_window_form-inp input {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  height: auto;
+  box-sizing: border-box;
+  display: block;
+}
+.order-popup-content .price_window_form-btn {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* Блок «Каталог товаров» на страницах Продукции (перед блоком Стоимость) */
+.product-catalog {
+  margin-top: 120px;
+}
+.product-catalog__wrapper {
+  max-width: 100%;
+}
+.product-catalog__title {
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.product-catalog__title span {
+  color: #4B0082;
+}
+.product-catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+.product-catalog__card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+.product-catalog__card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.product-catalog__card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.product-catalog__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-catalog__card-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.product-catalog__card-title {
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.product-catalog__card-title a {
+  color: #263238;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.product-catalog__card-title a:hover {
+  color: #4B0082;
+}
+.product-catalog__card-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4B0082;
+  margin-bottom: 16px;
+}
+.product-catalog__card-btn {
+  margin-top: auto;
+  width: 100%;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .product-catalog {
+    margin-top: 80px;
+  }
+  .product-catalog__title {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .product-catalog__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Страница «Обработка персональных данных» /privacy */
+.privacy-page {
+  font-family: inherit;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background: #fafafa;
+}
+.privacy-page .container {
+  max-width: 900px;
+}
+.privacy-page__content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 48px 56px 56px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+.privacy-page h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.25;
+  color: #263238;
+  margin: 0 0 28px;
+}
+.privacy-page h2 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.35;
+  color: #4B0082;
+  margin: 32px 0 12px;
+}
+.privacy-page h2:first-of-type {
+  margin-top: 0;
+}
+.privacy-page p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #37474f;
+  margin: 0 0 16px;
+}
+.privacy-page .privacy-download {
+  margin-bottom: 24px;
+}
+.privacy-page .privacy-download a {
+  color: #4B0082;
+  text-decoration: underline;
+  font-weight: 500;
+}
+.privacy-page .privacy-download a:hover {
+  color: #6a0dad;
+}
+.privacy-page .privacy-footnote {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+@media (max-width: 768px) {
+  .privacy-page {
+    padding-top: 100px;
+    padding-bottom: 48px;
+  }
+  .privacy-page__content {
+    padding: 28px 20px 36px;
+  }
+  .privacy-page h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .privacy-page h2 {
+    font-size: 18px;
+    margin-top: 28px;
+  }
+  .privacy-page p {
+    font-size: 15px;
+  }
+}
+
+/* Envybox: кнопка «Позвоним вам» — перенос вправо (масштаб задаётся в ThemeScripts.js) */
+body a.cbk-phone-fixed,
+body a.callbackkiller.cbk-phone-fixed {
+  inset: auto 20px 20px auto !important;
+  left: auto !important;
+  right: 20px !important;
+  bottom: 20px !important;
+}

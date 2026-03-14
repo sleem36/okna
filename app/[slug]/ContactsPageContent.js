@@ -54,7 +54,7 @@ export default function ContactsPageContent() {
                 <div className="contacts-fio">ИП Шагалкина Яна Анатольевна</div>
                 <div className="contacts-inn">ИНН 771579690162</div>
                 <div className="contacts-inn">
-                  <a href="/uploads/2023/06/Политика-конфедициальности.docx">Политика конфиденциальности</a>
+                  <a href="/privacy">Политика конфиденциальности</a>
                 </div>
               </div>
             </div>

@@ -1,6 +1,5 @@
 export default function ContactFormSection({
   title = 'Оставить заявку на консультацию',
-  subtitle = '',
   sectionId = 'contacts_order',
   formId = 'main2',
 }) {
@@ -10,7 +9,6 @@ export default function ContactFormSection({
         <div className="price_window_order contacts_order">
           <div className="price_window_order-title">
             <h3>{title}</h3>
-            <p>{subtitle}</p>
           </div>
           <form className="price_window_form main_form contacts_form" id={formId} action="#">
             <div className="price_window_form-inp contacts_form-inp">
@@ -24,6 +22,10 @@ export default function ContactFormSection({
             <button type="submit" className="btn price_window_form-btn contacts_form-btn">
               Оставить заявку
             </button>
+            <p className="form-consent">
+              Нажимая на кнопку, Вы соглашаетесь на{' '}
+              <a href="/privacy">обработку своих данных</a>
+            </p>
           </form>
         </div>
       </div>

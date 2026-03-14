@@ -104,6 +104,10 @@ export default function CenaPageContent() {
                   <span className="floating-label floating-label-name">Номер телефона</span>
                 </div>
                 <button type="submit" className="btn price_window_form-btn">Оставить заявку</button>
+                <p className="form-consent">
+                  Нажимая на кнопку, Вы соглашаетесь на{' '}
+                  <a href="/privacy">обработку своих данных</a>
+                </p>
               </form>
             </div>
           </div>

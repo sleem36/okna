@@ -39,5 +39,6 @@ WordPress.2026-03-11.xml
 docs
 
 # server config & archives
-.htaccess
+.htpasswd
 *.zip
+*.rar

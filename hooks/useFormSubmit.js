@@ -22,7 +22,7 @@ export default function useFormSubmit() {
   useEffect(() => {
     let tries = 0;
     function bindOrderForms() {
-      document.querySelectorAll("form.main_form, form#main1").forEach((form) => {
+      document.querySelectorAll("form.main_form:not(#popup_order), form#main1, form#calc1").forEach((form) => {
         if (form.dataset.boundSubmit === "1") return;
         form.dataset.boundSubmit = "1";
         form.addEventListener("submit", async (e) => {
