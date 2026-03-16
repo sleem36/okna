@@ -15,10 +15,14 @@ export default function useSwiperInit() {
       if (!el || el.swiper || reasonTries > 40) return;
       if (window.Swiper) {
         new window.Swiper(".swiper.reason", {
-          slidesPerView: "auto",
-          spaceBetween: 40,
+          slidesPerView: 1,
+          spaceBetween: 16,
           navigation: { nextEl: ".reason-next", prevEl: ".reason-prev" },
           pagination: { el: ".reason-pagination", clickable: true },
+          breakpoints: {
+            768: { slidesPerView: 3, spaceBetween: 24 },
+            1024: { slidesPerView: 5, spaceBetween: 40 },
+          },
         });
       } else {
         reasonTries += 1;

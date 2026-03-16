@@ -32,6 +32,70 @@
 html {
   scroll-behavior: smooth;
 }
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Блок «Не смогли определиться с выбором?» — форма на весь экран на мобилках */
+@media (max-width: 768px) {
+  .price_window_order.contacts_order {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px 16px;
+  }
+  .price_window_order.contacts_order::before,
+  .price_window_order.contacts_order::after {
+    display: none;
+  }
+  .contacts_form {
+    width: 100%;
+    padding: 24px 0;
+  }
+  .contacts_form-inp,
+  .contacts_form-btn {
+    width: 100%;
+  }
+  /* Внутренняя строка формы «Не смогли определиться» — один столбец на мобилках */
+  .price_window_form .price_window_form-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .price_window_form.contacts_form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .price_window_form-inp.contacts_form-inp {
+    flex: 1 1 auto;
+  }
+  .price_window_form-btn.contacts_form-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Слайдер «Причина выбрать мягкие окна» — два целых элемента на мобильных */
+  #reason .swiper {
+    overflow: visible !important;
+  }
+  #reason .swiper-wrapper {
+    justify-content: center;
+  }
+  #reason .swiper-slide {
+    box-sizing: border-box;
+    padding: 0 12px !important;
+    width: 100% !important;
+  }
+  #reason .reason-slide-block {
+    overflow: visible !important;
+  }
+
+  /* Контейнер блока «Причина выбрать мягкие окна» без боковых отступов */
+  #reason .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 #price_window_order {
   scroll-margin-top: 120px;
 }
@@ -371,6 +435,22 @@ html {
 .order-popup-content .form-consent {
   margin-top: 8px;
   margin-bottom: 12px;
+}
+
+/* Блок «Не смогли определиться»: строка с кнопкой, текст согласия — под кнопками */
+.price_window_form {
+  flex-wrap: wrap;
+}
+.price_window_form .price_window_form-row {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+}
+.price_window_form .form-consent {
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
 /* Кнопка «Оставить заявку» в шапке — как ссылка */

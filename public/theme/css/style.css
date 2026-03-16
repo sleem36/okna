@@ -2728,7 +2728,7 @@ input.range:focus::-ms-fill-upper {
 }
 
 #reason .swiper-slide {
-	width: calc(100% / 5 - 40px);
+	width: auto;
 }
 
 .reason__wrapper {
